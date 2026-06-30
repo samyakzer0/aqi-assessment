@@ -1,0 +1,4 @@
+city,aqi,pm25,raw_timestamp,country
+New York,42,9.1,2026-06-30 11:00:00,USA
+London,60,11.5,2026-06-30 11:15:00,UK
+Tokyo,35,7.8,2026-06-30 11:30:00,Japan

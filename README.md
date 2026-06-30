@@ -5,11 +5,11 @@
 [](https://github.com/samyakzer0/aqi-assessment#project-overview)
 This project implements a serverless ETL pipeline using Amazon S3, AWS Lambda, Amazon DynamoDB, Amazon CloudWatch, GitHub Actions, AWS CodeBuild, and AWS CodePipeline.
 
-The pipeline processes air quality data stored in a CSV file. Invalid records are rejected, valid records are cleaned and transformed, and the final records are stored in DynamoDB.
+The pipeline processes air quality data stored in CSV, JSON, TXT, or Parquet files. Invalid records are rejected, valid records are cleaned and transformed, and the final records are stored in DynamoDB.
 
 ## Dataset Source
 [](https://github.com/samyakzer0/aqi-assessment#dataset-source)
-This project uses a sample AQI CSV dataset created for this assignment and inspired by common air quality monitoring records.
+This project uses sample AQI datasets created for this assignment and inspired by common air quality monitoring records.
 
 The dataset contains the following fields:
 
@@ -23,7 +23,7 @@ The dataset contains the following fields:
 [](https://github.com/samyakzer0/aqi-assessment#etl-scenario)
 The purpose of this project is to prepare clean air quality records for analytics, monitoring, or alerting.
 
-The raw AQI CSV file is uploaded to the `raw/` prefix in Amazon S3. The upload triggers an AWS Lambda function.
+The raw AQI file is uploaded to the `raw/` prefix in Amazon S3. The upload triggers an AWS Lambda function.
 
 The Lambda function reads the file, validates the records, transforms the valid records, and stores the clean data in Amazon DynamoDB.
 
@@ -31,7 +31,7 @@ The Lambda function reads the file, validates the records, transforms the valid 
 [](https://github.com/samyakzer0/aqi-assessment#architecture)
 
 ```
-AQI CSV Data
+AQI Data
 	|
 	v
 Amazon S3 raw/
@@ -76,11 +76,18 @@ AWS Lambda Deployment
 
 ### Extract
 [](https://github.com/samyakzer0/aqi-assessment#extract)
-The Lambda function reads the CSV file from:
+The Lambda function reads supported files from:
 
 ```
 s3://<your-bucket-name>/raw/sample_raw_data.csv
 ```
+
+Supported file types:
+
+- `.csv`
+- `.json`
+- `.txt`
+- `.parquet`
 
 ### Transform
 [](https://github.com/samyakzer0/aqi-assessment#transform)
@@ -160,14 +167,14 @@ Trigger settings:
 
 - Bucket: `<your-bucket-name>`
 - Prefix: `raw/`
-- Suffix: `.csv`
+- Suffix: `.csv`, `.json`, `.txt`, or `.parquet`
 - Event type: `All object create events`
-Whenever a CSV file is uploaded to the `raw/` prefix, the Lambda function runs automatically.
+Whenever a supported file is uploaded to the `raw/` prefix, the Lambda function runs automatically.
 
 ## Testing Steps
 [](https://github.com/samyakzer0/aqi-assessment#testing-steps)
 
-1. Upload `sample_raw_data.csv` to the S3 `raw/` prefix.
+1. Upload `sample_raw_data.csv`, `sample_raw_data.json`, `sample_raw_data.txt`, or `sample_raw_data.parquet` to the S3 `raw/` prefix.
 2. Confirm that S3 triggers the Lambda function.
 3. Check the Lambda execution result.
 4. Open CloudWatch Logs and verify the audit summary.

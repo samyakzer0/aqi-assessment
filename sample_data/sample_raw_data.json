@@ -1,0 +1,30 @@
+[
+  {
+    "city": "Indore",
+    "aqi": 52,
+    "pm25": 13.5,
+    "raw_timestamp": "2026-06-30 10:00:00",
+    "country": "India"
+  },
+  {
+    "city": "Mumbai",
+    "aqi": 88,
+    "pm25": 24.2,
+    "raw_timestamp": "2026-06-30 10:05:00",
+    "country": "India"
+  },
+  {
+    "city": "Delhi",
+    "aqi": 165,
+    "pm25": 110.8,
+    "raw_timestamp": "2026-06-30 10:10:00",
+    "country": "India"
+  },
+  {
+    "city": "Unknown",
+    "aqi": -10,
+    "pm25": 0.0,
+    "raw_timestamp": "2026-06-30 10:15:00",
+    "country": "Unknown"
+  }
+]
